@@ -100,7 +100,7 @@ this.user$ = this.afAuth.authState.pipe(
 
   }
 
-  //***********************GESTION DE LOGIN Y CREACION USUSARIO*************************** */
+  //***********************GESTION DE LOGIN Y CREACION USUSARIO**************************** */
 
   async loginGoogle(){
     try{
