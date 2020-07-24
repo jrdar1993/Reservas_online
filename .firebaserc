@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "reservasonline-6d950": {
+      "hosting": {
+        "reservapp": [
+          "reservasonline-6d950"
+        ]
+      }
+    }
+  }
+}

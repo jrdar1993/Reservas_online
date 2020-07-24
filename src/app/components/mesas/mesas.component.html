@@ -1,0 +1,107 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">RESERVAS-ONLINE ADMINISTRACION</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink="/admin">Administracion</a>
+      </li>
+      </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>ADMINISTRACIÓN DE MESAS</h1>
+       <hr />
+       <div class="container">
+        <h2>Agregar Mesa</h2>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form (ngSubmit)="agregar()" >
+                <div class="row p-1">
+                    <input type="text" placeholder="Ingrese  Nombre Mesa" 
+                    class="form-control"  [(ngModel)]="mesas.nombre" name="nombre">
+                </div>
+               <div class="row p-1">
+                    <input type="number" placeholder="Ingrese Espacios" 
+                    class="form-control" [(ngModel)]="mesas.espacios" name="espacios">
+               </div>
+               <div class="row p-1">
+                 <div class="col">
+                   <label for="">¿Está acupada?</label>
+                 </div>
+                 <div class="col">
+                    <input type="checkbox" placeholder="Ocupada?" class="form-control" [(ngModel)]="mesas.ocupada" name="ocupada">
+                 </div>
+              </div>
+                <div class="row p-1">
+                    <button type="button" class="btn btn-success btn-lg mt-5" type="submit">Agregar</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="container p-1">
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Código único</th>
+                <th>Nombre</th>
+                <th>Espacios</th>
+                <th>Ocupada?</th>
+                 </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let lmesa of lmesas">
+                <td>{{lmesa.id}}</td>
+                <td>{{lmesa.nombre}}</td>
+                <td>{{lmesa.espacios}}</td>
+                <td>{{lmesa.ocupada}}</td>
+                <td class="float-right">
+                  <button type="button btn btn-primary" (click)="editar(lmesa)"
+                  data-toggle="modal" data-target="#exampleModal">EDITAR</button>
+                  <button type="button btn-primary" (click)="eliminar(lmesa)">ELIMINAR</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>      
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editor Mesas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="agmesaeditada()">
+                        <div class="row p-1">
+                    <input type="text" placeholder="Ingrese nueva Mesa" 
+                    class="form-control" [(ngModel)]="edmesas.nombre" name="nombre" required>
+                </div>
+               <div class="row p-1">
+                    <input type="number" placeholder="Ingrese nuevos Espacios" 
+                    class="form-control" [(ngModel)]="edmesas.espacios" name="espacios">
+               </div>
+               <div class="row p-1">
+                <input type="checkbox" placeholder="Ocupada?" 
+                class="form-control" [(ngModel)]="edmesas.ocupada" name="ocupada">
+           </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" type="submit">Actualizar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

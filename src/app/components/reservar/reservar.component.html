@@ -1,0 +1,135 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">RESERVAS-ONLINE</a>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="#" routerLink="/home">Inicio</a>
+        </li>
+        </ul>
+      </div>
+  </nav>
+  
+  <div class="container">
+      <h1>CREACION DE MESAS</h1>
+         <hr />
+         <div class="container">
+          <h2>Agregar Reserva</h2>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form (ngSubmit)="agregar()" >
+                  <div class="row p-1">
+                      <input type="text" placeholder="Ingrese  Nombre" 
+                      class="form-control"  [(ngModel)]="reservas.nombre" name="nombre">
+                  </div>
+                 <div class="row p-1">
+                      <input type="date" placeholder="Ingrese fecha" 
+                      class="form-control" [(ngModel)]="reservas.fecha" name="fecha">
+                 </div>
+                 <div class="row p-1">
+                 <select [(ngModel)]="reservas.nombremesa"  name="nombremesa" class="form-control" (change)="SetIdMesa(1, $event.target.value)">
+                  <option value="" selected disabled="disabled">Selecciona una mesa</option>
+                  <option value="{{lmesar.nombre}}" *ngFor="let lmesar of lmesasr" [ngClass]="{'text-danger': lmesar.ocupada==true, 'text-success': lmesar.ocupada==false}" >
+                    {{lmesar.nombre}}
+                  </option>
+              </select>
+           </div>
+           <div class="row p-1">
+            <select [(ngModel)]="reservas.hora" name="hora" class="form-control" (change)="onChange($event.target.value)">
+              <option value="" selected disabled="disabled">Selecciona un horario</option>
+              <option value="{{lhoras.hora}}" *ngFor="let lhoras of lhorario">
+                {{lhoras.hora}}
+              </option>
+          </select>
+       </div>
+       <div class="row p-1">
+              <input type="text"  [(ngModel)]="reservas.horasalida" disabled="true"
+              class="form-control" name="horasalida" value="{{horasalida}}">
+        </div> 
+     <div class="row p-1">
+                      <button type="button" class="btn btn-success btn-lg mt-5" type="submit">Agregar</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="container p-1">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th>Código único</th>
+                  <th>Nombre</th>
+                  <th>fecha</th>
+                  <th>hora</th>
+                  <th>hora salida</th>
+                  <th>Mesa Reservada</th>
+                    </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let lreserva of lreservas">
+                  <td>{{lreserva.id}}</td>
+                  <td>{{lreserva.nombre}}</td>
+                  <td>{{lreserva.fecha}}</td>
+                  <td>{{lreserva.hora}}</td>
+                  <td>{{lreserva.horasalida}}</td>
+                  <td>{{lreserva.nombremesa}}</td>
+                  <td class="float-right">
+                    <button type="button btn btn-primary" (click)="editar(lreserva)"
+                    data-toggle="modal" data-target="#exampleModal">EDITAR</button>
+                    <button type="button btn-primary" (click)="eliminar(lreserva)">ELIMINAR</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>      
+  </div>
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editor Reservas</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form (ngSubmit)="agreservaeditada()">
+                          <div class="row p-1">
+                      <input type="text" placeholder="Ingrese Nombre" 
+                      class="form-control" [(ngModel)]="editreservas.nombre" name="nombre" required>
+                  </div>
+                 <div class="row p-1">
+                      <input type="date" placeholder="Ingrese fecha" 
+                      class="form-control" [(ngModel)]="editreservas.fecha" name="fecha">
+                 </div>
+                 <div class="row p-1">
+                      <input type="time" placeholder="Ingrese hora" 
+                      class="form-control" [(ngModel)]="editreservas.hora" name="hora">
+                 </div>
+                 <div class="row p-1">
+                    <input type="text" placeholder="Ingrese Mesa" 
+                    class="form-control" [(ngModel)]="editreservas.nombremesa" name="Nombre Mesa">
+               </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-success" type="submit">Actualizar</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function HoraSalida()
+      {
+      alert("hellow");
+      }
+      </script>
+  
+  
+  
